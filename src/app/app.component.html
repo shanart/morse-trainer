@@ -13,7 +13,11 @@
 
     <div class="form-group">
         <label for="">WPM</label>
-        <input type="text" class="form-control form-control-sm" #word_per_minute />
+        <input type="number" class="form-control form-control-sm" name="word_per_minute" [value]="interval_speed"
+            (keyup)="onInputChange($event)" #word_per_minute />
     </div>
+
+
+    <cd-timer countdown="true" startTime="start_time" end_timer="end_time"></cd-timer>
 
 </div>

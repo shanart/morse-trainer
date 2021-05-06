@@ -13,6 +13,8 @@ export class AppComponent implements OnInit, OnDestroy {
     interval_speed: number = 1;
     running: boolean = false;
     interval_id;
+    session_timer;
+    session_length: number = 1000 * 60 * 15; // 15 minutes
     currentCharacter: BehaviorSubject<string> = new BehaviorSubject<string>("0");
     @ViewChild('word_per_minute', {static: true}) wpm: ElementRef;
 
@@ -25,6 +27,14 @@ export class AppComponent implements OnInit, OnDestroy {
         return this.interval_speed;
     }
 
+    onInputChange($event) {
+        // console.log($event.target.value);
+        if ($event.target.value.length) {
+            this.interval_speed = parseInt($event.target.value);
+            this.startCounter(); 
+        }
+    }
+
     startCounter() {
         this.stopCounter();
         let i = 0;
@@ -33,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.interval_id = setInterval(function () {
             self.currentCharacter.next(self.getRandomCharacter());
             i++;
-        }, this.interval_speed * 1000);
+        }, 1000/this.interval_speed);
     }
 
     stopCounter() {
@@ -49,6 +59,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {}
     ngOnInit() {}
+
+    startGlobalTimer() {
+
+    }
+
+    stopGlobalTimer() {
+        
+    }
 
     private PWMToSeconds(value: number): number {
         return value / 12;
