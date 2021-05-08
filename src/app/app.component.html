@@ -4,25 +4,32 @@
             <h1 class="symbol" *ngIf="currentCharacter">{{ currentCharacter.value }}</h1>
         </div>
         <div class="col-sm-6">
-            <ul class="nav nav-pills mb-3">
-                <li class="nav-item mr-2">
-                    <button class="btn" [ngClass]="{'btn-outline-success': !running, 'btn-success': running}" 
-                        (click)="startCounter()">Старт</button>
-                </li>
-                <li class="nav-item">
-                    <button class="btn btn-outline-warning" (click)="stopCounter()">Стоп</button>
-                </li>
-            </ul>
+            
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <ul class="nav nav-pills mb-0">
+                    <li class="nav-item mr-2">
+                        <button class="btn" [ngClass]="{'btn-outline-success': !running, 'btn-success': running}" 
+                            (click)="startCounter()">Старт</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-warning" (click)="stopCounter()">Стоп</button>
+                    </li>
+                </ul>
+
+                <div>{{ show_end_time() }}</div>
+            </div>
         
             <div class="form-group">
                 <label for="">Промежуток между символами: {{ speed.value/1000 }} с.</label>
-                <input type="range" class="form-control form-control-sm" name="word_per_minute" [value]="html_input_value"
-                    step="1"
+                <div class="mesures">
+                    <div *ngFor="let item of [].constructor(6); let i = index;">{{i}}</div>
+                </div>
+                <input type="range" class="form-control form-control-sm" 
+                    name="word_per_minute" 
+                    [value]="html_input_value" step="1"
+                    (touchend)="onInputChange($event)"
                     (mouseup)="onInputChange($event)" #word_per_minute />
             </div>
         </div>
     </div>
-
-    <!-- <cd-timer countdown="true" startTime="start_time" end_timer="end_time"></cd-timer> -->
-
 </div>

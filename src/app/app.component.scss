@@ -1,4 +1,12 @@
 .symbol {
     font-size: 180px;
     font-weight: 600;
+    line-height: 130px;
+}
+
+.mesures {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    counter-reset: mesure;
 }
