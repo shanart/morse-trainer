@@ -1,23 +1,28 @@
 <div class="container py-5">
-
-    <h1 *ngIf="currentCharacter">{{ currentCharacter.value }}</h1>
-
-    <ul class="nav nav-pills mb-3">
-        <li class="nav-item mr-2">
-            <button class="btn" [ngClass]="{'btn-outline-success': !running, 'btn-success': running}" (click)="startCounter()">Start</button>
-        </li>
-        <li class="nav-item">
-            <button class="btn btn-outline-warning" (click)="stopCounter()">Stop</button>
-        </li>
-    </ul>
-
-    <div class="form-group">
-        <label for="">WPM</label>
-        <input type="number" class="form-control form-control-sm" name="word_per_minute" [value]="interval_speed"
-            (keyup)="onInputChange($event)" #word_per_minute />
+    <div class="row">
+        <div class="col-sm-6 text-center">
+            <h1 class="symbol" *ngIf="currentCharacter">{{ currentCharacter.value }}</h1>
+        </div>
+        <div class="col-sm-6">
+            <ul class="nav nav-pills mb-3">
+                <li class="nav-item mr-2">
+                    <button class="btn" [ngClass]="{'btn-outline-success': !running, 'btn-success': running}" 
+                        (click)="startCounter()">Старт</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-warning" (click)="stopCounter()">Стоп</button>
+                </li>
+            </ul>
+        
+            <div class="form-group">
+                <label for="">Промежуток между символами: {{ speed.value/1000 }} с.</label>
+                <input type="range" class="form-control form-control-sm" name="word_per_minute" [value]="html_input_value"
+                    step="1"
+                    (mouseup)="onInputChange($event)" #word_per_minute />
+            </div>
+        </div>
     </div>
 
-
-    <cd-timer countdown="true" startTime="start_time" end_timer="end_time"></cd-timer>
+    <!-- <cd-timer countdown="true" startTime="start_time" end_timer="end_time"></cd-timer> -->
 
 </div>
