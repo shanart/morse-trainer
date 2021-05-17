@@ -1,7 +1,13 @@
 .symbol {
     font-size: 180px;
     font-weight: 600;
-    line-height: 130px;
+}
+
+@media (max-width: 1200px) {
+    .symbol {
+        font-size: 120px;
+        font-weight: 600;
+    }
 }
 
 .mesures {
