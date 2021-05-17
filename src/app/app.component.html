@@ -1,35 +1,24 @@
-<div class="container py-5">
-    <div class="row">
-        <div class="col-sm-6 text-center">
-            <h1 class="symbol" *ngIf="currentCharacter">{{ currentCharacter.value }}</h1>
-        </div>
-        <div class="col-sm-6">
-            
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <ul class="nav nav-pills mb-0">
-                    <li class="nav-item mr-2">
-                        <button class="btn" [ngClass]="{'btn-outline-success': !running, 'btn-success': running}" 
-                            (click)="startCounter()">Старт</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-outline-warning" (click)="stopCounter()">Стоп</button>
-                    </li>
-                </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">RadioDict</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                <div>{{ show_end_time() }}</div>
-            </div>
-        
-            <div class="form-group">
-                <label for="">Промежуток между символами: {{ speed.value/1000 }} с.</label>
-                <div class="mesures">
-                    <div *ngFor="let item of [].constructor(6); let i = index;">{{i}}</div>
-                </div>
-                <input type="range" class="form-control form-control-sm" 
-                    name="word_per_minute" 
-                    [value]="html_input_value" step="1"
-                    (touchend)="onInputChange($event)"
-                    (mouseup)="onInputChange($event)" #word_per_minute />
-            </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                    <a class="nav-link" [routerLink]="['/']">Тренировка</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                    <a class="nav-link" [routerLink]="['/dictionary/']">Словарь</a>
+                </li>
+            </ul>
         </div>
     </div>
+</nav>
+
+<div class="container py-5">
+    <router-outlet></router-outlet>
 </div>

@@ -1,14 +1,15 @@
 import { Component, OnDestroy, OnInit, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject } from 'rxjs'; 
+import { dictionary, IDictItem } from '../dict';
 
 
 @Component({
-    selector: '#app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
+    selector: '#counter',
+    templateUrl: './counter.component.html',
+    styleUrls: ['./counter.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class CounterComponent implements OnInit, OnDestroy {
 
     // milisecond
     minimum_speed: number = 5000;
@@ -21,6 +22,10 @@ export class AppComponent implements OnInit, OnDestroy {
         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+"
     ]
+
+    dictionary: Array<string> = [];
+    is_dict: boolean = false;
+
     currentCharacter: BehaviorSubject<string> = new BehaviorSubject<string>(this.getRandomCharacter());
     html_input_value: number = 40;
     speed: BehaviorSubject<number> = new BehaviorSubject<number>(2000);
@@ -32,6 +37,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {}
     ngOnInit() {
+        dictionary.map(word => {
+            this.dictionary.push(word.label);
+        });
     }
 
     onInputChange($event) {
@@ -39,7 +47,6 @@ export class AppComponent implements OnInit, OnDestroy {
         const speed_in_milliseconds = Math.floor((current_value/100) * this.minimum_speed);
         this.interval_speed = speed_in_milliseconds;
         this.speed.next(speed_in_milliseconds);
-
         if ($event.target.value.length) {
             this.startCounter(); 
         }
@@ -54,23 +61,34 @@ export class AppComponent implements OnInit, OnDestroy {
             self.currentCharacter.next(self.getRandomCharacter());
             i++;
         }, this.interval_speed);
-
         this.startGlobalTimer();
     }
 
     stopCounter() {
-        // this.currentCharacter.next("0");
         this.running = false;
         clearInterval(this.interval_id);
         clearInterval(this.session_timer);
     }
 
-    getRandomCharacter() {
-        const randomIndex = Math.floor(Math.random() * this.symbols.length);
-        return this.symbols[randomIndex];
+    toggleDictionary() { 
+        this.running = false;
+        clearInterval(this.interval_id);
+        clearInterval(this.session_timer);
+        this.is_dict = !this.is_dict;
+
+        this.currentCharacter.next(this.getRandomCharacter());
     }
 
-    
+    getRandomCharacter() {
+        if ( this.is_dict ) {
+            const randomIndex = Math.floor(Math.random() * this.dictionary.length);
+            return this.dictionary[randomIndex];
+        } else {
+            const randomIndex = Math.floor(Math.random() * this.symbols.length);
+            return this.symbols[randomIndex];
+        }
+    }
+
     startGlobalTimer() {
         clearInterval(this.session_timer);
         const self = this;
