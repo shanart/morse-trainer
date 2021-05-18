@@ -1,21 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">RadioDict</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-                    <a class="nav-link" [routerLink]="['/']">Тренировка</a>
-                </li>
-                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-                    <a class="nav-link" [routerLink]="['/dictionary/']">Словарь</a>
-                </li>
-            </ul>
-        </div>
+        <ul class="nav ml-auto">
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <a class="nav-link" [routerLink]="['/']">Тренировка</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <a class="nav-link" [routerLink]="['/dictionary/']">Словарь</a>
+            </li>
+        </ul>
     </div>
 </nav>
 
