@@ -3,10 +3,9 @@
     font-weight: 600;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 992px) {
     .symbol {
-        font-size: 120px;
-        font-weight: 600;
+        font-size: 22vw;
     }
 }
 
@@ -15,4 +14,9 @@
     align-items: center;
     justify-content: space-between;
     counter-reset: mesure;
+}
+
+.counter-setting {
+    max-width: 600px;
+    margin: 0 auto;;
 }
